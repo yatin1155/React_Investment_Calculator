@@ -13,6 +13,7 @@ const DEFAULT_USER_INPUT = {
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT)
 
+  const inputIsValid = userInput.duration >= 1
   const handleChange = (inputIdentifier, newValue) => {
     setUserInput(prevUserState => {
       return {
@@ -26,7 +27,8 @@ function App() {
     <>
       <Header></Header>
       <UserInput inputValues={userInput} onUpdate={handleChange}></UserInput>
-      <Results inputValues={userInput}></Results>
+      {!inputIsValid && (<p className="center">Please enter duration greater than Zero.</p>)}
+      {inputIsValid && <Results inputValues={userInput}></Results>}
     </>
   )
 }
